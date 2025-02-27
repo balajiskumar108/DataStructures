@@ -102,4 +102,44 @@ public Node<Integer> getInterleavedArithmeticFibonacciSequences(int start, int d
 		return result;
 	}
 
+public Node<String> getGroupedStrings(Node<String> input, int m, int n) {
+	
+	    Node<String> tmpG1 = new Node<>("", null); 
+	    Node<String> tmpG2 = new Node<>("", null); 
+	    Node<String> tmpG3 = new Node<>("", null); 
+	    
+	    Node<String> group1 = tmpG1;
+	    Node<String> group2 = tmpG2;
+	    Node<String> group3 = tmpG3;
+
+	    if (input == null) {
+	        return null;
+	    }
+
+	    while (input != null) {
+	        String element = input.getElement();
+
+	        if (element.length() < m) {
+	            group1.setNext(new Node<>(element, null));
+	            group1 = group1.getNext(); 
+	        } else if (element.length() >= m && element.length() < n) {
+	            group2.setNext(new Node<>(element, null));
+	            group2 = group2.getNext();  
+	        } else {
+	            group3.setNext(new Node<>(element, null));
+	            group3 = group3.getNext();  
+	        }
+	        input = input.getNext();
+	    }
+	    
+	    group1.setNext(tmpG2.getNext()); 
+	    group2.setNext(tmpG3.getNext());  
+	    
+	    return tmpG1.getNext();
+		
+	}
+	
+}
+
+
  
