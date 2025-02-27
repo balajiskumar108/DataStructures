@@ -60,4 +60,46 @@ public class ListUtilities {
          return dummy.getNext();
      } 
  }
+
+public Node<Integer> getInterleavedArithmeticFibonacciSequences(int start, int diff, int sizeArith, int sizeFibo) {
+		Node<Integer> result = null;
+		Node<Integer> curr = null;
+
+		
+		int a = 1, b = 1; 
+		int value = start; 
+		int arithIndex = 0, fiboIndex = 0;
+
+		while (arithIndex < sizeArith || fiboIndex < sizeFibo) {
+			
+			if (arithIndex < sizeArith) {
+				if (curr == null) {
+					result = new Node<>(value,null);
+					curr = result;
+				} else {
+					curr.setNext(new Node<>(value,null));
+					curr = curr.getNext();
+				}
+				value += diff; 
+				arithIndex++;
+			}
+
+			if (fiboIndex < sizeFibo) {
+				if (curr == null) {
+					result = new Node<>(a,null);
+					curr = result;
+				} else {
+					curr.setNext(new Node<>(a,null));
+					curr = curr.getNext();
+				}
+				int temp = a;
+				a = b;
+				b = temp + b;
+				fiboIndex++;
+			}
+		}
+
+		return result;
+	}
+
  
